@@ -1,0 +1,13 @@
+---
+- hosts: all
+  
+  tasks: 
+   - name: Adding tag to the image
+     command: docker tag myimage:v1 shraddhadoc45/project_repo:v2
+    
+   - name: Push image to docker hub
+     command: docker push shraddhadoc45/project_repo:v2
+
+   - name: Removing tag from local image
+     command: doker rmi shraddhadoc45/project_repo:v2
+     ignore_errors: yes

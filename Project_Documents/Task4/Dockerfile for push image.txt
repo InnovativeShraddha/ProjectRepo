@@ -1,0 +1,23 @@
+FROM ubuntu:18.04
+  
+RUN  apt-get -y update
+
+RUN  apt-get install -y openjdk-8-jdk
+
+RUN mkdir /usr/local/tomcat
+
+WORKDIR /usr/local/tomcat
+
+ADD  https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.70/bin/apache-tomcat-9.0.70.tar.gz /usr/local/tomcat
+
+RUN  tar xvfz apache*.tar.gz
+
+RUN mv apache-tomcat-9.0.70/* /usr/local/tomcat
+
+COPY ./*.war /usr/local/tomcat/webapps
+
+
+
+EXPOSE 8080
+
+CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]

@@ -1,0 +1,52 @@
+---
+
+kind: Deployment
+
+apiVersion: apps/v1
+
+metadata:
+
+   name: abctech-app
+
+
+
+spec:
+
+  replicas: 2
+
+  selector:
+
+    matchLabels:
+
+      app: abctech-app
+
+  strategy:
+
+    type: RollingUpdate
+
+    rollingUpdate:
+
+       maxUnavailable: 1
+
+       maxSurge: 2
+
+
+  template:
+
+    metadata: 
+
+      labels:
+
+        app: abctech-app
+
+    spec:
+
+      containers:
+                  
+        - image: shraddhadoc45/my_repo_images:myimage1
+
+          name: my-deploy
+         
+          ports:
+
+           - containerPort: 8080

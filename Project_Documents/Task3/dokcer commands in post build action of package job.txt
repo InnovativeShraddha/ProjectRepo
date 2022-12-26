@@ -1,0 +1,6 @@
+cd /opt/Docker
+docker rmi -f tomcat:ver1
+docker build -t tomcat:ver1 .
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker run -d --name tomcat_cont -p 8084:8080 tomcat:ver1

@@ -1,0 +1,12 @@
+---
+- hosts: ansible
+
+  tasks:
+    - name: creating container from image
+      docker_container:
+        name: my_cont1
+        state: started
+        image: "myimage:ver1"
+        ports:
+          - "8086:8080"
+

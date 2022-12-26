@@ -1,0 +1,25 @@
+---
+- hosts: dockerhost
+  become_user: dockeradmin
+
+  tasks:
+    - name: stop container if exists with same name
+      command: docker stop tomcat_cont
+      ignore_errors: yes
+
+    - name: delete container if exists with same name
+      command: docker stop tomcat_cont
+      ignore_errors: yes
+
+    - name: remove images if exists with same name
+      command: docker rmi -f tomcat:ver1
+      ignore_errors: yes
+
+    - name: creating image on dockerhost using Dockerfile
+      command: docker build -t tomcat:ver1 .
+      args:
+        chdir: /opt/Docker
+
+    - name: creating container from image
+      command: docker run -d --name tomcat_cont -p 8084:8080 tomcat:ver1
+

@@ -1,0 +1,22 @@
+---
+- hosts: ansible
+  become_user: ansibleusr
+  
+  tasks:
+    - name: Stop container if exists
+      command: docker stop my_cont
+      ignore_errors: yes
+
+    - name: remove conatiner if exists
+      command: docker rm my_cont
+      ignore_errors: yes 
+
+    - name: Remove image if exists with same name
+      command: docker rmi shraddhadoc45/my_repo_images:myimage1
+      ignore_errors: yes
+
+    - name: Pulling image from docker hub
+      command: docker pull shraddhadoc45/my_repo_images:myimage1
+
+    - name: Creating conatainer out of image 
+      command: docker run -d --name my_cont1 -p 8089:8080 shraddhadoc45/my_repo_images:myimage1

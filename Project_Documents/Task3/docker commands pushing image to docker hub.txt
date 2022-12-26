@@ -1,0 +1,9 @@
+cd /opt/Docker
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi -f tomcat:9.0
+docker build -t myapp .
+docker tag myapp:latest shraddhadoc45/myimages12:ver2
+docker login -u shraddhadoc45 --password Dockershraddha@09
+docker push shraddhadoc45/myimages12:ver2
+docker logout
